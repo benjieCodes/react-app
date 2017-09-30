@@ -19,7 +19,6 @@ const Root = () => {
         <Miss component={NotFound} />
       </div>
     </BrowserRouter>
-
   )
 }
 
