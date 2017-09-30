@@ -2,10 +2,6 @@ import React from 'react';
 import { getFunName } from '../helpers';
 
 class StorePicker extends React.Component {
-  constructor() {
-    super(); // runs React.Component first
-    this.goToStore = this.goToStore.bind(this);
-  }
   goToStore(event) {
     event.preventDefault();
     console.log('You successfully changed the URL')
@@ -17,7 +13,7 @@ class StorePicker extends React.Component {
   render() {
     // JSX Syntax below
     return (
-      <form className ="store-selector" onSubmit={this.goToStore}>
+      <form className ="store-selector" onSubmit={this.goToStore.bind(this)}>
         <h2>Please Enter A Store</h2>
         <input type="text" required placeholder="Store Name"
           defaultValue={ getFunName() }
