@@ -15,6 +15,7 @@ class App extends React.Component {
     this.removeFish = this.removeFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
+    this.removeFromOrder = this.removeFromOrder.bind(this);
 
     // getinitialState
     this.state = {
@@ -71,7 +72,7 @@ class App extends React.Component {
 
   removeFish(key) {
     const fishes = {...this.state.fishes};
-    fishes[key] = null; // setting to null instead of delete fishes[key] for firebase purposes
+    fishes[key] = null; // setting to null instead of 'delete fishes[key]'' for firebase purposes
     this.setState({ fishes });
   }
 
@@ -88,6 +89,12 @@ class App extends React.Component {
     order[key] = order[key] + 1 || 1;
     // update our state
     this.setState({ order: order });
+  }
+
+  removeFromOrder(key) {
+    const order = {...this.state.order};
+    delete order[key];
+    this.setState({ order });
   }
 
 
@@ -109,6 +116,7 @@ class App extends React.Component {
             fishes={this.state.fishes}
             order={this.state.order}
             params={this.state.params}
+            removeFromOrder={this.removeFromOrder}
           />
           <Inventory
             addFish={this.addFish}
