@@ -48,8 +48,6 @@ class App extends React.Component {
 
   componentWillUpdate(nextProps, nextState) {
     // this runs right before <App> is rendered
-    console.log('Something has changed');
-    console.log({nextProps, nextState});
     localStorage.setItem(`order-${this.props.params.storeId}`, JSON.stringify(nextState.order)); // the reason why we stringify object is because localStorage can only accept string
   }
 
@@ -129,4 +127,9 @@ class App extends React.Component {
     )
   }
 }
+
+App.propTypes = {
+  params: React.PropTypes.object.isRequired
+}
+
 export default App;
