@@ -1,11 +1,19 @@
 import React from 'react';
 import AddFishForm from './AddFishForm';
+import base from '../base'
 
 class Inventory extends React.Component {
   constructor() {
     super();
     this.renderInventory = this.renderInventory.bind(this);
+    this.renderLogin = this.renderLogin.bind(this);
+    this.authenticate = this.authenticate.bind(this);
+    this.authHandler = this.authHandler.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      uid: null,
+      ownder: null,
+    }
   }
 
   handleChange(e, key) {
@@ -17,6 +25,40 @@ class Inventory extends React.Component {
     }
     this.props.updateFish(key, updatedFish);
   }
+
+  authenticate(provider, authData) {
+    console.log(provider);
+    console.log(authData);
+    /*
+    base.auth().signInWithPopup(provider).then(function(authData) {
+	     console.log(authData);
+       }).catch(function(error) {
+	     console.log(error);
+       });
+       */
+  }
+
+
+  authHandler(err, authData) {
+    console.log(authData);
+    if(err) {
+      console.log(err);
+      return;
+    }
+  }
+
+  renderLogin() {
+    return(
+      <nav className="login">
+        <h2>Inventory</h2>
+        <p>Sign in to manage your store's inventory</p>
+        <button className="github" onClick={() => this.authenticate(new base.auth.GithubAuthProvider())}>Login with your Github Account!</button>
+        <button className="facebook" onClick={() => this.authenticate(new base.auth.FacebookAuthProvider())}>Login with your Facebook Account!</button>
+        <button className="twitter" onClick={() => this.authenticate(new base.auth.TwitterAuthProvider())}>Login with your Twitter Account!</button>
+      </nav>
+    )
+  }
+
 
   renderInventory(key) {
     const fish = this.props.fishes[key]
@@ -37,6 +79,21 @@ class Inventory extends React.Component {
 
   }
   render () {
+    const logout = <button>Log Out!</button>
+    // check if they aren't logged in to application
+    if(!this.state.uid) {
+      return <div>{this.renderLogin()}</div>
+    }
+
+    // check if they are the ownder of the store
+    if(this.state.uid !== this.state.owner) {
+      return (
+        <div>
+          <p>Sorry you are not the owner of this store!</p>
+          {logout}
+        </div>
+      )
+    }
     return (
       <div>
       <h2>Inventory</h2>
