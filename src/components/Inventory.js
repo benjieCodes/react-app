@@ -27,15 +27,11 @@ class Inventory extends React.Component {
   }
 
   authenticate(provider, authData) {
-    console.log(provider);
-    console.log(authData);
-    /*
     base.auth().signInWithPopup(provider).then(function(authData) {
 	     console.log(authData);
        }).catch(function(error) {
 	     console.log(error);
        });
-       */
   }
 
 
