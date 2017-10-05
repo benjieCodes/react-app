@@ -16,6 +16,16 @@ class Inventory extends React.Component {
     }
   }
 
+
+  // this checks to see if user has already signed in
+  componentDidMount() {
+    base.onAuth((user) => {
+      if (user) {
+        this.authHandler({user}, null);
+      }
+    })
+  }
+
   handleChange(e, key) {
     const fish = this.props.fishes[key];
     // take a copy of that fish and update it with the new data
