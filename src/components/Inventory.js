@@ -3,7 +3,7 @@ import AddFishForm from './AddFishForm';
 import base from '../base'
 
 class Inventory extends React.Component {
-  constructor() {
+  constructor () {
     super();
     this.renderInventory = this.renderInventory.bind(this);
     this.renderLogin = this.renderLogin.bind(this);
@@ -19,7 +19,7 @@ class Inventory extends React.Component {
 
 
   // this checks to see if user has already signed in
-  componentDidMount() {
+  componentDidMount () {
     base.onAuth((user) => {
       if (user) {
         this.authHandler({user}, null);
@@ -75,7 +75,7 @@ class Inventory extends React.Component {
     })
   }
 
-  renderLogin() {
+  renderLogin () {
     return(
       <nav className="login">
         <h2>Inventory</h2>

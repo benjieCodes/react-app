@@ -7,8 +7,8 @@ import sampleFishes from '../sample-fishes'
 import base from '../base';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor () {
+    super ();
 
     this.addFish = this.addFish.bind(this);
     this.updateFish = this.updateFish.bind(this);
@@ -24,7 +24,7 @@ class App extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this.ref = base.syncState(`${this.props.params.storeId}/fishes`
       , {
         context: this,
@@ -42,7 +42,7 @@ class App extends React.Component {
       }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     base.removeBinding(this.ref);
   }
 
@@ -74,7 +74,7 @@ class App extends React.Component {
     this.setState({ fishes });
   }
 
-  loadSamples() {
+  loadSamples () {
     this.setState({
       fishes: sampleFishes
     })
